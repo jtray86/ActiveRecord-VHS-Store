@@ -7,8 +7,3 @@ class Rental < ActiveRecord::Base
         d + 7
     end    
 end 
-
-# d.to_s
-# => "2009-08-31"
-# >> (d+3).to_s
-# => "2009-09-03"
