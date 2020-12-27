@@ -7,6 +7,22 @@ class Vhs < ActiveRecord::Base
     has_many :clients, through: :rentals 
     belongs_to :movie 
 
+    def self.available_rentals
+        Rental.all.select{|rental|rental.current == false}
+    end   
+
+    def self.movie_available_by_title
+        binding.pry
+        
+       self.all.map{|vhs|vhs.available_rentals.vhs_id == self.vhs_id}.uniq
+        
+       #vhs_ids.all.map{|inst|inst == self.id}
+
+
+        #.available_rentals vhs = movie_id
+
+    end    
+
     private
 
     # generates serial number based on the title

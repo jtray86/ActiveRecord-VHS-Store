@@ -7,23 +7,18 @@ class Client <ActiveRecord::Base
         Rental.create(vhs_id: vhs.id, current: true, client_id: new_client.id)
     end  
 
-    # def current_rentals
-    #     Rental.all.where{|rental| rental.client_id == self.id}
-    # end
-
     def return_all
         binding.pry
         self.rentals.where(vhs_id: vhs.ids).update(current: false) 
     end 
 
-    def number_of_rentals 
-        self.rentals.count
+    def money_spent 
+        number_of_rentals = self.rentals.count 
+        (5.35 * number_of_rentals).round(2) 
     end 
 
-    def self.paid_most 
-        self 
-        place_holder = 0
-        self.number_of_rentals
-        binding.pry
+    def self.paid_most
+        Client.all.max_by{|client|client.number_of_rentals}
+        
     end
 end    
